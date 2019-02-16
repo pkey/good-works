@@ -1,0 +1,12 @@
+List of participants:
+<ul *ngFor="let person of persons">
+  <li [ngStyle]="{'color' : person.groups ? 'green' : 'red'}">
+    {{person.name}} {{person.middleName}} {{person.surname}} <br />
+    <strong>pid:</strong> {{person.pid}} <br />
+    <span [hidden]="!person.phone && !person.email"> <strong>Contacts:</strong> {{person.email}} {{person.phone}}
+      <br /></span>
+    <span *ngIf="person.groups?.length > 1">{{person.groups.length}} groups: {{person.groups}}</span>
+    <span *ngIf="person.groups?.length == 1">Only 1 group: {{person.groups}}</span>
+    <span *ngIf="person.groups == null">No groups</span>
+  </li>
+</ul>
