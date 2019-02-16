@@ -1,12 +1,29 @@
-List of participants:
-<ul *ngFor="let person of persons">
-  <li [ngStyle]="{'color' : person.groups ? 'green' : 'red'}">
-    {{person.name}} {{person.middleName}} {{person.surname}} <br />
-    <strong>pid:</strong> {{person.pid}} <br />
-    <span [hidden]="!person.phone && !person.email"> <strong>Contacts:</strong> {{person.email}} {{person.phone}}
-      <br /></span>
-    <span *ngIf="person.groups?.length > 1">{{person.groups.length}} groups: {{person.groups}}</span>
-    <span *ngIf="person.groups?.length == 1">Only 1 group: {{person.groups}}</span>
-    <span *ngIf="person.groups == null">No groups</span>
-  </li>
-</ul>
+<p class="font-weight-bold title">People who enrolled to volunteer into various different groups: </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">PID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Contacts</th>
+      <th scope="col">Enrolled in</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of persons">
+      <td>{{person.pid}}</td>
+      <td>{{person.name}} {{person.middleName}} {{person.surname}}</td>
+      <td><span [hidden]="!person.email && !person.phone">
+          {{person.email}}
+          {{person.phone}}
+        </span>
+        <span [hidden]="person.email || person.phone"> - </span></td>
+      <td><span *ngIf="person.groups == null"> No groups</span>
+        <span *ngIf="person.groups != null"> {{person.groups.length}}
+          <span *ngIf="person.groups.length != 1; else onlyOneGroup">groups:</span>
+          <ng-template #onlyOneGroup>group:</ng-template>
+          {{person.groups}}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
