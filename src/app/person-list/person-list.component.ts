@@ -44,4 +44,8 @@ export class PersonListComponent implements OnInit {
     ];
   }
 
+  deletePerson(personToDelete: Person) {
+    this.persons = this.persons.filter(person => person.pid !== personToDelete.pid);
+  }
+
 }

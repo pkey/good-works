@@ -6,24 +6,12 @@
       <th scope="col">Name</th>
       <th scope="col">Contacts</th>
       <th scope="col">Enrolled in</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let person of persons">
-      <td>{{person.pid}}</td>
-      <td>{{person.name}} {{person.middleName}} {{person.surname}}</td>
-      <td><span [hidden]="!person.email && !person.phone">
-          {{person.email}}
-          {{person.phone}}
-        </span>
-        <span [hidden]="person.email || person.phone"> - </span></td>
-      <td><span *ngIf="person.groups == null"> No groups</span>
-        <span *ngIf="person.groups != null"> {{person.groups.length}}
-          <span *ngIf="person.groups.length != 1; else onlyOneGroup">groups:</span>
-          <ng-template #onlyOneGroup>group:</ng-template>
-          {{person.groups}}
-        </span>
-      </td>
+    <tr *ngFor="let person of persons" app-person-details
+    [person]="person" (deletePerson)="deletePerson($event)">
     </tr>
   </tbody>
 </table>
