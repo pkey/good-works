@@ -1,0 +1,126 @@
+<div class="container">
+  <h1>Reactive form</h1>
+  <form [formGroup]="personForm" (ngSubmit)="addUser()">
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Name: </span>
+      </div>
+      <input formControlName="name" type="text" class="form-control" placeholder="Name">
+    </div>
+    <div *ngIf="personForm.controls.name.invalid && personForm.controls.name.touched">
+      <div *ngIf="personForm.controls.name.hasError('required')" class="alert alert-danger" role="alert">
+        Please enter a first name
+      </div>
+      <div *ngIf="personForm.controls.name.hasError('minlength') || personForm.controls.name.hasError('maxlength')" class="alert alert-danger" role="alert">
+        First name must be 3-20 symbols
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Last name: </span>
+      </div>
+      <input formControlName="surname" type="text" class="form-control" placeholder="Last name">
+    </div>
+    <div *ngIf="personForm.controls.surname.invalid && personForm.controls.surname.touched">
+      <div *ngIf="personForm.controls.surname.hasError('required')" class="alert alert-danger" role="alert">
+        Please enter a surname
+      </div>
+      <div *ngIf="personForm.controls.surname.hasError('minlength') || personForm.controls.surname.hasError('maxlength')" class="alert alert-danger" role="alert">
+        Last name must be 3-20 symbols
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">PID: </span>
+      </div>
+      <input formControlName="pid" type="text" class="form-control" placeholder="pid">
+    </div>
+    <div *ngIf="personForm.controls.pid.invalid && personForm.controls.pid.touched">
+      <div *ngIf="personForm.controls.pid.hasError('required')" class="alert alert-danger" role="alert">
+        Please enter pid
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Email: </span>
+      </div>
+      <input formControlName="email" type="text" class="form-control" placeholder="Email">
+    </div>
+    <div *ngIf="personForm.controls.email.invalid && personForm.controls.email.touched">
+      <div *ngIf="personForm.controls.email.hasError('required')" class="alert alert-danger" role="alert">
+        Please enter an email
+      </div>
+      <div *ngIf="personForm.controls.email.hasError('incorrectMailFormat')" class="alert alert-danger" role="alert">
+        Email format is incorrect
+      </div>
+    </div>
+
+    <button [disabled]="personForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+
+
+  <!--<h1>Template driven form</h1>-->
+
+  <!--<div class="mt-4">-->
+    <!--<div class="input-group mb-3">-->
+      <!--<div class="input-group-prepend">-->
+        <!--<span class="input-group-text">Name: </span>-->
+      <!--</div>-->
+      <!--<input [(ngModel)]="person.firstName" type="text" class="form-control" placeholder="Name">-->
+    <!--</div>-->
+    <!--<div *ngIf="!person.firstName" class="alert alert-danger" role="alert">-->
+      <!--Please enter a first name-->
+    <!--</div>-->
+    <!--&lt;!&ndash; NOTE kape patikrint ar inputas buvo patouchintas ?? Neimonama &ndash;&gt;-->
+    <!--<div *ngIf="personForm.controls.firstName.hasError('minlength') || personForm.controls.firstName.hasError('maxlength')" class="alert alert-danger" role="alert">-->
+      <!--First name must be 3-20 symbols-->
+    <!--</div>-->
+
+    <!--<div class="input-group mb-3">-->
+      <!--<div class="input-group-prepend">-->
+        <!--<span class="input-group-text">Last name: </span>-->
+      <!--</div>-->
+      <!--<input [(ngModel)]="person.lastName" type="text" class="form-control" placeholder="Last name">-->
+    <!--</div>-->
+    <!--<div *ngIf="personForm.controls.lastName.invalid && personForm.controls.lastName.touched">-->
+      <!--<div *ngIf="personForm.controls.lastName.hasError('required')" class="alert alert-danger" role="alert">-->
+        <!--Please enter a surname-->
+      <!--</div>-->
+      <!--<div *ngIf="personForm.controls.lastName.hasError('minlength') || personForm.controls.lastName.hasError('maxlength')" class="alert alert-danger" role="alert">-->
+        <!--Last name must be 3-20 symbols-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="input-group mb-3">-->
+      <!--<div class="input-group-prepend">-->
+        <!--<span class="input-group-text">PID: </span>-->
+      <!--</div>-->
+      <!--<input [(ngModel)]="person.pid" type="text" class="form-control" placeholder="pid">-->
+    <!--</div>-->
+    <!--<div *ngIf="personForm.controls.pid.invalid && personForm.controls.pid.touched">-->
+      <!--<div *ngIf="personForm.controls.pid.hasError('required')" class="alert alert-danger" role="alert">-->
+        <!--Please enter pid-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="input-group mb-3">-->
+      <!--<div class="input-group-prepend">-->
+        <!--<span class="input-group-text">Email: </span>-->
+      <!--</div>-->
+      <!--<input [(ngModel)]="person.email" type="text" class="form-control" placeholder="Email">-->
+    <!--</div>-->
+    <!--<div *ngIf="personForm.controls.email.invalid && personForm.controls.email.touched">-->
+      <!--<div *ngIf="personForm.controls.email.hasError('required')" class="alert alert-danger" role="alert">-->
+        <!--Please enter an email-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<button (click)="showPerson()" class="btn btn-primary">submit</button>-->
+  <!--</div>-->
+
+</div>

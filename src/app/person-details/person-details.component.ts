@@ -11,6 +11,7 @@ export class PersonDetailsComponent implements OnInit {
 
   @Input() person: Person;
   @Output() deletePerson = new EventEmitter<Person>();
+  @Output() editPerson = new EventEmitter<Person>();
 
   constructor() { }
 

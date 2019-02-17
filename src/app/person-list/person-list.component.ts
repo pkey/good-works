@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../models';
 import { PersonService } from "../services/person.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-person-list',
@@ -10,7 +11,8 @@ import { PersonService } from "../services/person.service";
 export class PersonListComponent implements OnInit {
   persons: Person[];
 
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService,
+              private router: Router) { }
 
   ngOnInit() {
     this.persons = [{
@@ -47,8 +49,35 @@ export class PersonListComponent implements OnInit {
   }
 
   deletePerson(personToDelete: Person) {
-    this.persons = this.persons.filter(person => person.pid !== personToDelete.pid);
-    this.personService.changePersonList(this.persons);
+    // this.persons = this.persons.filter(person => person.pid !== personToDelete.pid);
+    // this.personService.changePersonList(this.persons);
+
+    console.log(personToDelete);
+    this.personService.removePerson(personToDelete.pid).subscribe(
+      res =>{
+        this.persons = this.persons.filter(item => item.pid !== personToDelete.pid);
+        this.personService.changePersonList(this.persons);
+      },
+      err => {
+        //show error
+      }
+    );
+  }
+
+  getPersons() {
+    this.personService.getPersons().subscribe(
+      persons => {
+        console.log(persons);
+        this.personService.changePersonList(persons);
+        this.persons = persons;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('completed');
+      }
+    )
   }
 
 }
