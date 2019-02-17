@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Person} from "../models";
 import {GroupService} from "../services/group.service";
@@ -18,7 +18,10 @@ export class PersonFormComponent implements OnInit {
   person : Person;
   personId : number;
   isReady : boolean = false;
+
   groups : Group[];
+  selectedGroup : Group;
+  addedGroups: Group[] = [];
 
   personForm: FormGroup;
 
@@ -60,16 +63,21 @@ export class PersonFormComponent implements OnInit {
       "name": [person ? person.name : '', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       "surname": [person ? person.surname : '', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       "pid": [person ? person.pid : '', Validators.required],
-      "email": [person ? person.email : '', [Validators.required, CustomValidator.isValidEmailFormat]]
+      "email": [person ? person.email : '', [Validators.required, CustomValidator.isValidEmailFormat]],
     })
   }
 
   addUser() {
     console.log(this.personForm);
     console.log(this.personForm.controls);
+    console.log(this.personForm.controls);
     this.personsService.addPerson(this.personForm.value).subscribe(
       res => {
-        console.log(res);
+        console.log(res, this.addedGroups);
+        this.addedGroups.forEach(group => {
+          console.log('hi');
+          this.personsService.setGroup(this.personForm.value.pid, group.id);
+        })
       },
       err => {
         console.log(err);
@@ -78,6 +86,25 @@ export class PersonFormComponent implements OnInit {
         console.log('finally')
       }
     );
+  }
+
+  addGroup() {
+    const control = <FormArray>this.personForm.controls['groups'];
+    if (!this.addedGroups.includes(this.selectedGroup)) {
+      this.addedGroups.push(this.selectedGroup);
+    }
+  }
+
+  initGroup(group) {
+    return this.formBuilder.group(group);
+  }
+
+  removeGroup(id) {
+    this.addedGroups.splice(id,1);
+  }
+
+  setSelectedGroup(group: Group) {
+    this.selectedGroup = group;
   }
 
   getGroups() {

@@ -59,6 +59,29 @@
       </div>
     </div>
 
+    <h3>Add groups:</h3>
+    <div class="card mb-3">
+      <div class="card-header"><div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{selectedGroup ? selectedGroup.name : 'Select group'}}
+        </button>
+        <button class="btn btn-primary ml-3" type="button" [disabled]="!selectedGroup" (click)="addGroup()">
+          Add group
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" *ngFor="let group of groups" style="cursor: pointer" (click)="setSelectedGroup(group)">{{group.name}}</a>
+        </div>
+      </div>
+      </div>
+      <div class="card-body" *ngIf="addedGroups?.length">
+        <h4>Groups: </h4>
+        <span class="group-label" *ngFor="let group of addedGroups; let i = index">
+          {{group.name}}
+          <span (click)="removeGroup(i)" class="close small">x</span>
+        </span>
+      </div>
+    </div>
+
     <button *ngIf="!isEditForm" [disabled]="personForm.invalid" type="submit" class="btn btn-primary">Submit</button>
     <button *ngIf="isEditForm" [disabled]="personForm.invalid" type="submit" (click)="updatePerson()" class="btn btn-primary">Update</button>
 

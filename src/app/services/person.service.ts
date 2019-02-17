@@ -7,10 +7,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class PersonService {
-  
+
   private personList = new BehaviorSubject<Person[]>([]);
   currentPersonList = this.personList.asObservable();
-  
+
   changePersonList(list: Person[]) {
     this.personList.next(list);
   }
@@ -35,6 +35,13 @@ export class PersonService {
     this.createAuthorizationHeader(headers);
     return this.http.post(`https://swedbank-demo.herokuapp.com/api/persons`,
       person, {headers})
+  }
+
+  setGroup(pid, id) {
+    console.log('setting');
+    const headers = new HttpHeaders();
+    this.createAuthorizationHeader(headers);
+    return this.http.patch(`https://swedbank-demo.herokuapp.com/api/persons/${pid}/groups/${id}`, {}, {headers})
   }
 
   updatePerson(person: Person) {
