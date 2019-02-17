@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../models';
+import { PersonService } from "../services/person.service";
 
 @Component({
   selector: 'app-person-list',
@@ -8,18 +9,14 @@ import { Person } from '../models';
 })
 export class PersonListComponent implements OnInit {
   persons: Person[];
-
-  constructor() { }
-
-  ngOnInit() {
-    this.persons = [{
-      pid: 10001,
-      name: 'Petras',
-      middleName: 'Jonas',
-      surname: 'Petrovičius',
-      phone: '+37067878787',
-      email: 'petrovic@p.lt'
-    },
+  initPersonsList = [{
+    pid: 10001,
+    name: 'Petras',
+    middleName: 'Jonas',
+    surname: 'Petrovičius',
+    phone: '+37067878787',
+    email: 'petrovic@p.lt'
+  },
     {
       pid: 10002,
       name: 'Kazimieras',
@@ -41,11 +38,24 @@ export class PersonListComponent implements OnInit {
       phone: '+37067878787',
       groups: ['SOS']
     }
-    ];
+  ];
+
+  constructor(private personService: PersonService) { }
+
+  ngOnInit() {
+    this.persons = this.initPersonsList;
+    this.personService.changePersonList(this.persons);
+  }
+
+  changeList() {
+    const newList = this.initPersonsList;
+    this.personService.changePersonList(newList);
+    this.persons = newList;
   }
 
   deletePerson(personToDelete: Person) {
     this.persons = this.persons.filter(person => person.pid !== personToDelete.pid);
+    this.personService.changePersonList(this.persons);
   }
 
 }
