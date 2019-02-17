@@ -11,6 +11,7 @@ export class PersonDetailsComponent implements OnInit {
 
   @Input() person: Person;
   @Output() deletePerson = new EventEmitter<Person>();
+  @Output() editPerson = new EventEmitter<Person>();
 
   constructor() { }
 
@@ -19,6 +20,10 @@ export class PersonDetailsComponent implements OnInit {
 
   onPersonDelete() {
     this.deletePerson.emit(this.person);
+  }
+
+  onEditClick() {
+    this.editPerson.emit(this.person);
   }
 
 }

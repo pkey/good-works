@@ -11,9 +11,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let person of persons" app-person-details
-    [person]="person" (deletePerson)="deletePerson($event)">
+    [person]="person" (editPerson)="editPerson(person)" (deletePerson)="deletePerson($event)">
     </tr>
   </tbody>
 </table>
+
+<button class="btn-primary btn m-4" (click)="getPersons()">Fetch persons</button>
 
 <app-group-list></app-group-list>
