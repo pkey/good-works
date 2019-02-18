@@ -18,10 +18,6 @@ export class PersonService {
   constructor(private http: HttpClient) {
   }
 
-  createAuthorizationHeader(headers: HttpHeaders) {
-    headers.append('Content-Type', 'application/json');
-  }
-
   getPersons() {
     return this.http.get<Person[]>(`https://swedbank-demo.herokuapp.com/api/persons`)
   }
@@ -31,30 +27,22 @@ export class PersonService {
   }
 
   addPerson(person: Person) {
-    const headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
     return this.http.post(`https://swedbank-demo.herokuapp.com/api/persons`,
-      person, {headers})
+      person)
   }
 
   setGroup(pid, id) {
     console.log('setting');
-    const headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
-    return this.http.patch(`https://swedbank-demo.herokuapp.com/api/persons/${pid}/groups/${id}`, {}, {headers})
+    return this.http.patch(`https://swedbank-demo.herokuapp.com/api/persons/${pid}/groups/${id}`, {})
   }
 
   updatePerson(person: Person) {
-    const headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
     return this.http.put(`https://swedbank-demo.herokuapp.com/api/persons`,
-      person, {headers})
+      person)
   }
 
   removePerson(id) {
-    const headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
-    return this.http.delete(`https://swedbank-demo.herokuapp.com/api/persons/${id}`, {headers})
+    return this.http.delete(`https://swedbank-demo.herokuapp.com/api/persons/${id}`)
   }
 
 }
