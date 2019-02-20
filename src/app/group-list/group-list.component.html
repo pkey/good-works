@@ -1,23 +1,23 @@
 <div class="new-list">
   Would you like to fecth new list of participants?
-  <button (click)="fetchUsers()" type="button" class="btn btn-secondary">Fetch</button>
+  <button type="button" class="btn btn-secondary">Fetch</button>
 </div>
- <!--1 STEP-->
+<!--1 STEP-->
 <!--<p class="font-weight-bold title">Thanks for all groups: </p>-->
 <!--<ul class="list-group list-group-flush" *ngFor="let person of persons">-->
-  <!--<li class="list-group-item" *ngFor="let group of person.groups">-->
-    <!--<p class="text-center">-->
-      <!--{{group}}-->
-    <!--</p>-->
-  <!--</li>-->
+<!--<li class="list-group-item" *ngFor="let group of person.groups">-->
+<!--<p class="text-center">-->
+<!--{{group}}-->
+<!--</p>-->
+<!--</li>-->
 <!--</ul>-->
 
 <!-- 2ND STEP -->
-<p class="font-weight-bold title">Thanks for all groups: </p>
+<p class="font-weight-bold title">Thanks for all groups:</p>
 <ul class="list-group list-group-flush" *ngFor="let group of groups">
   <li class="list-group-item">
     <p class="text-center">
-      {{group}}
+      {{ group }}
     </p>
   </li>
 </ul>
