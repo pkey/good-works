@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PersonDetailsComponent } from './person-details.component';
 import {PersonService} from '../services/person.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('PersonDetailsComponent', () => {
   let component: PersonDetailsComponent;

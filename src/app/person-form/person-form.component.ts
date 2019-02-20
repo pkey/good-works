@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Person} from "../models";
-import {GroupService} from "../services/group.service";
-import {Group} from "../models/group";
-import {CustomValidator} from "../utils/custom-validators";
-import {PersonService} from "../services/person.service";
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Person} from '../models';
+import {GroupService} from '../services/group.service';
+import {Group} from '../models/group';
+import {CustomValidator} from '../utils/custom-validators';
+import {PersonService} from '../services/person.service';
 
 @Component({
   selector: 'app-person-form',
@@ -14,13 +14,13 @@ import {PersonService} from "../services/person.service";
 })
 export class PersonFormComponent implements OnInit {
 
-  isEditForm : boolean;
-  person : Person;
-  personId : number;
-  isReady : boolean = false;
+  isEditForm: boolean;
+  person: Person;
+  personId: number;
+  isReady = false;
 
-  groups : Group[];
-  selectedGroup : Group;
+  groups: Group[];
+  selectedGroup: Group;
   addedGroups: Group[] = [];
 
   personForm: FormGroup;
@@ -31,15 +31,15 @@ export class PersonFormComponent implements OnInit {
               private router: Router,
               private groupService: GroupService) {
     this.route.params.subscribe(params => {
-      this.personId = +params['id'];
-      console.log(+params['id'], !!+params['id'], params['id']);
-      this.isEditForm = !!+params['id'] || params['id'];
-    } )
+      this.personId = +params.id;
+      console.log(+params.id, !!+params.id, params.id);
+      this.isEditForm = !!+params.id || params.id;
+    } );
   }
 
   ngOnInit(): void {
     this.getGroups();
-    if(this.isEditForm) {
+    if (this.isEditForm) {
       this.personsService.getPerson(this.personId).subscribe(
         person => {
           this.createForm(person);
@@ -51,7 +51,7 @@ export class PersonFormComponent implements OnInit {
           this.isReady = true;
         }
 
-      )
+      );
     } else {
       this.createForm();
       this.isReady = true;
@@ -60,11 +60,11 @@ export class PersonFormComponent implements OnInit {
 
   createForm(person?: Person) {
     this.personForm = this.formBuilder.group({
-      "name": [person ? person.name : '', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      "surname": [person ? person.surname : '', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      "pid": [person ? person.pid : '', Validators.required],
-      "email": [person ? person.email : '', [Validators.required, CustomValidator.isValidEmailFormat]],
-    })
+      name: [person ? person.name : '', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      surname: [person ? person.surname : '', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      pid: [person ? person.pid : '', Validators.required],
+      email: [person ? person.email : '', [Validators.required, CustomValidator.isValidEmailFormat]],
+    });
   }
 
   addUser() {
@@ -77,19 +77,19 @@ export class PersonFormComponent implements OnInit {
         this.addedGroups.forEach(group => {
           console.log('hi');
           this.personsService.setGroup(this.personForm.value.pid, group.id);
-        })
+        });
       },
       err => {
         console.log(err);
       },
       () => {
-        console.log('finally')
+        console.log('finally');
       }
     );
   }
 
   addGroup() {
-    const control = <FormArray>this.personForm.controls['groups'];
+    const control = this.personForm.controls.groups as FormArray;
     if (!this.addedGroups.includes(this.selectedGroup)) {
       this.addedGroups.push(this.selectedGroup);
     }
@@ -100,7 +100,7 @@ export class PersonFormComponent implements OnInit {
   }
 
   removeGroup(id) {
-    this.addedGroups.splice(id,1);
+    this.addedGroups.splice(id, 1);
   }
 
   setSelectedGroup(group: Group) {
@@ -113,7 +113,7 @@ export class PersonFormComponent implements OnInit {
         console.log(groups);
         this.groups = groups;
       }
-    )
+    );
   }
 
   updatePerson() {
@@ -123,9 +123,9 @@ export class PersonFormComponent implements OnInit {
         console.log('gg');
       },
       err => {
-        console.log('sry')
+        console.log('sry');
       }
-    )
+    );
   }
 
 }

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GroupService } from './group.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('GroupService', () => {
   beforeEach(() => TestBed.configureTestingModule({imports: [HttpClientTestingModule], providers: [GroupService]}));

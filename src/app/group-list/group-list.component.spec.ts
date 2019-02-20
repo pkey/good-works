@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GroupListComponent } from './group-list.component';
-import {HttpClient} from "@angular/common/http";
-import {GroupService} from "../services/group.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {HttpClient} from '@angular/common/http';
+import {GroupService} from '../services/group.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('GroupListComponent', () => {
   let component: GroupListComponent;

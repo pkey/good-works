@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Person} from '../models';
-import {PersonService} from "../services/person.service";
+import {PersonService} from '../services/person.service';
 
 @Component({
   selector: 'app-group-list',
@@ -23,7 +23,7 @@ export class GroupListComponent implements OnInit {
   }
 
   getUpdatedGroups(personList) {
-    let updatedGroups = [];
+    const updatedGroups = [];
     personList.forEach(person => {
       if (person.groups) {
         person.groups.forEach(group => {
@@ -31,7 +31,7 @@ export class GroupListComponent implements OnInit {
               updatedGroups.push(group);
             }
           }
-        )
+        );
       }
     });
     return updatedGroups;

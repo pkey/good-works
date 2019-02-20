@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
-import {Person} from "../models";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {Person} from '../models';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -23,38 +23,38 @@ export class PersonService {
   }
 
   getPersons() {
-    return this.http.get<Person[]>(`https://swedbank-demo.herokuapp.com/api/persons`)
+    return this.http.get<Person[]>(`https://swedbank-demo.herokuapp.com/api/persons`);
   }
 
   getPerson(id) {
-    return this.http.get<Person>(`https://swedbank-demo.herokuapp.com/api/persons/${id}`)
+    return this.http.get<Person>(`https://swedbank-demo.herokuapp.com/api/persons/${id}`);
   }
 
   addPerson(person: Person) {
     const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
     return this.http.post(`https://swedbank-demo.herokuapp.com/api/persons`,
-      person, {headers})
+      person, {headers});
   }
 
   setGroup(pid, id) {
     console.log('setting');
     const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
-    return this.http.patch(`https://swedbank-demo.herokuapp.com/api/persons/${pid}/groups/${id}`, {}, {headers})
+    return this.http.patch(`https://swedbank-demo.herokuapp.com/api/persons/${pid}/groups/${id}`, {}, {headers});
   }
 
   updatePerson(person: Person) {
     const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
     return this.http.put(`https://swedbank-demo.herokuapp.com/api/persons`,
-      person, {headers})
+      person, {headers});
   }
 
   removePerson(id) {
     const headers = new HttpHeaders();
     this.createAuthorizationHeader(headers);
-    return this.http.delete(`https://swedbank-demo.herokuapp.com/api/persons/${id}`, {headers})
+    return this.http.delete(`https://swedbank-demo.herokuapp.com/api/persons/${id}`, {headers});
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../models';
-import { PersonService } from "../services/person.service";
-import {Router} from "@angular/router";
+import { PersonService } from '../services/person.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-person-list',
@@ -54,18 +54,18 @@ export class PersonListComponent implements OnInit {
 
     console.log(personToDelete);
     this.personService.removePerson(personToDelete.pid).subscribe(
-      res =>{
+      res => {
         this.persons = this.persons.filter(item => item.pid !== personToDelete.pid);
         this.personService.changePersonList(this.persons);
       },
       err => {
-        //show error
+        // show error
       }
     );
   }
 
   editPerson(person: Person) {
-    console.log("edit");
+    console.log('edit');
     this.router.navigate(['update-person', person.pid]);
   }
 
@@ -82,7 +82,7 @@ export class PersonListComponent implements OnInit {
       () => {
         console.log('completed');
       }
-    )
+    );
   }
 
 }
